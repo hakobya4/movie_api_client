@@ -1,7 +1,16 @@
 import Table from 'react-bootstrap/Table';
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
-export const MovieView = ({ movie, onBackClick }) => {
+
+
+
+export const MovieView = ({ movies }) => {
+  const { movieId } = useParams();
+
+  const movie = movies.find((b) => b.id === movieId);
   return (
+    
     <div>
       <div>
         <img style={{width: "400px" }} alt={movie.title} src={movie.image} />
@@ -26,9 +35,9 @@ export const MovieView = ({ movie, onBackClick }) => {
           </tr>
         </tbody>
       </Table>
-      <div>
-        <button variant="primary" onClick={onBackClick}>Back</button>
-      </div>
+      <Link to={`/`}>
+        <button className="back-button">Back</button>
+      </Link>
     </div>
   );
 };
