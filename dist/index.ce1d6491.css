@@ -6,7 +6,7 @@
   font-size: 20px;
 }
 
-.login .form-control:not(:active), .signup .form-control:not(:active) {
+.login .form-control:not(:active), .signup .form-control:not(:active), .profile .form-control:not(:active) {
   background-color: #fff;
 }
 

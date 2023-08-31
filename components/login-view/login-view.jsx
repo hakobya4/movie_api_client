@@ -26,7 +26,7 @@ export const LoginView = ({ onLoggedIn }) => {
         console.log("Login response: ", data);
         if (data.user) {
           localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.token);
           onLoggedIn(data.user, data.token); //pass user and token back to MainView so any API requests can see it
         } else {
           alert("No such user");
@@ -40,18 +40,18 @@ export const LoginView = ({ onLoggedIn }) => {
   return (
     <Form className = "login" onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
-        <Form.Label class="text-light">Username:</Form.Label>
+        <Form.Label className="text-light">Username:</Form.Label>
         <Form.Control
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          minLength="3" 
+          minLength="5" 
         />
       </Form.Group>
 
       <Form.Group controlId="formPassword">
-        <Form.Label class="text-light">Password:</Form.Label>
+        <Form.Label className="text-light">Password:</Form.Label>
         <Form.Control
           type="password"
           value={password}
