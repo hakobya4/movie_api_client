@@ -1,5 +1,22 @@
-$color: steelblue;
 
-.my-flix {
-  color: $color;
+$body-bg: Black;
+$primary: Grey;
+
+
+.movie_card{
+  border-radius: 5px;
 }
+
+* {font-size: 20px;}
+
+.login .form-control:not(:active){
+  background-color: rgb(255, 255, 255)
+}
+
+.signup .form-control:not(:active){
+  background-color: rgb(255, 255, 255)
+}
+.profile .form-control:not(:active){
+  background-color: rgb(255, 255, 255)
+}
+@import '~bootstrap/scss/bootstrap.scss';
