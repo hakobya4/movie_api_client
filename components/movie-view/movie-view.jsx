@@ -2,9 +2,6 @@ import Table from 'react-bootstrap/Table';
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
-
-
 
 export const MovieView = ({ movies,user,token, setUser }) => {
   const { movieId } = useParams();
@@ -55,15 +52,13 @@ export const MovieView = ({ movies,user,token, setUser }) => {
               }
             })
     };
-
   const movie = movies.find((b) => b.id === movieId);
   return (
-    
     <div>
       <div>
         <img style={{width: "400px" }} alt={movie.title} src={movie.image} />
       </div>
-      <Table striped="columns">
+      <Table striped="columns" className='table table-dark'>
         <tbody>
           <tr>
             <td className="text-light">Title: </td>
@@ -75,21 +70,21 @@ export const MovieView = ({ movies,user,token, setUser }) => {
           </tr>
           <tr>
             <td className="text-light">Director: </td>
-            <td className="text-light">{movie.director.name}</td>
+            <td className="text-light"><Link to={`/director/${movie.director.name}`}>{movie.director.name}</Link></td>
           </tr>
           <tr>
             <td className="text-light">Genre: </td>
-            <td className="text-light">{movie.genre.name}</td>
+            <td className="text-light"><Link to={`/genre/${movie.genre.name}`} >{movie.genre.name} </Link></td>
           </tr>
         </tbody>
       </Table>
       <Link to={`/`}>
-        <button className="back-button">Back</button>
+        <button className="btn btn-outline-success">Back</button>
       </Link>
       {favorite ? (
-        <Button onClick={delFavorite}>Remove favorite</Button>
+        <button className="btn btn-outline-success" onClick={delFavorite}>Remove favorite</button>
         ) : (
-        <Button onClick={addFavorite}>Add favorite</Button>
+        <button className="btn btn-outline-success"onClick={addFavorite}>Add favorite</button>
             )}
     </div>
   );

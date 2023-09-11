@@ -5,17 +5,21 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { ProfileView } from "../profile-view/profile-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { GenreView } from "../genre-view/genre-view";
+import { DirectorView } from "../director-view/director-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 const MainView = () => {
+  
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
   const [user, setUser] = useState(storedUser? storedUser : null);
   const [token, setToken] = useState(storedToken? storedToken : null);
-  
-
+  const [selectedMovies, searchMovies] = useState("");
 
   const [movies, setMovies] = useState([]);
 
@@ -122,6 +126,34 @@ return (
             }
           />
           <Route
+            path="/genre/:genre"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                  <Col md={8}>
+                    <GenreView token={token} />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/director/:director"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                  <Col md={8}>
+                    <DirectorView token={token} movies={movies}/>
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
             path="/"
             element={
               <>
@@ -131,7 +163,26 @@ return (
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
+                  <Row className="d-flex m-2 justify-content-end">
+                    <Col xs="auto">
+                      <Form.Control
+                        onChange={(e) => searchMovies(e.target.value)}
+                        type="text"
+                        placeholder="Title Genre or Director"
+                        className=" mr-sm-2"
+                      />
+                    </Col>
+                    <Col xs="auto">
+                      <Button type="submit" variant="outline-success">Submit</Button>
+                    </Col>
+                  </Row>
+                  {movies.filter((movie) => {
+                        return selectedMovies === "" ? movie :
+                          movie.title.toLowerCase().includes(selectedMovies.toLowerCase()) ||
+                          movie.genre.name.toLowerCase().includes(selectedMovies.toLowerCase())||
+                          movie.director.name.toLowerCase().includes(selectedMovies.toLowerCase())
+                      }
+                    ).map((movie) => (
                       <Col className="mb-4" key={movie.id} md={3}>
                         <MovieCard movie={movie} />
                       </Col>
