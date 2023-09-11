@@ -2941,16 +2941,14 @@ var prevRefreshSig = window.$RefreshSig$;
 $parcel$ReactRefreshHelpers$98a3.prelude(module);
 
 try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _client = require("react-dom/client");
 var _mainView = require("../components/main-view/main-view");
-var _mainViewDefault = parcelHelpers.interopDefault(_mainView);
 var _indexScss = require("./index.scss");
 var _reactBootstrap = require("react-bootstrap");
 const App = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainViewDefault.default), {}, void 0, false, {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainView.MainView), {}, void 0, false, {
             fileName: "src/index.jsx",
             lineNumber: 9,
             columnNumber: 5
@@ -2977,7 +2975,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./index.scss":"lJZlQ","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../components/main-view/main-view":"bJOVs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","react-bootstrap":"3AD9A","react-dom/client":"lOjBx"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./index.scss":"lJZlQ","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../components/main-view/main-view":"bJOVs","react-bootstrap":"3AD9A","react-dom/client":"lOjBx"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("ee51401569654d91");
 
@@ -6293,6 +6291,7 @@ $parcel$ReactRefreshHelpers$f6a9.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MainView", ()=>MainView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _movieCard = require("../movie-card/movie-card");
@@ -6477,8 +6476,7 @@ const MainView = ()=>{
                                 }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     md: 8,
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _directorView.DirectorView), {
-                                        token: token,
-                                        movies: movies
+                                        token: token
                                     }, void 0, false, void 0, void 0)
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false)
@@ -6556,7 +6554,6 @@ const MainView = ()=>{
 };
 _s(MainView, "eeTrx1c8Z/aPDbVoZ8Nc6vByn/I=");
 _c = MainView;
-exports.default = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
 
@@ -44255,18 +44252,6 @@ const GenreView = ({ token })=>{
     }, [
         token
     ]);
-    (0, _react.useEffect)(()=>{
-        if (!token) return;
-        fetch(`https://movie-api-myflix-39dfea723223.herokuapp.com/movies/`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response)=>response.json()).then((data)=>{
-            setGenres(data.Genre);
-        });
-    }, [
-        token
-    ]);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _tableDefault.default), {
@@ -44281,7 +44266,7 @@ const GenreView = ({ token })=>{
                                     children: "Genre: "
                                 }, void 0, false, {
                                     fileName: "components/genre-view/genre-view.jsx",
-                                    lineNumber: 41,
+                                    lineNumber: 27,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -44289,13 +44274,13 @@ const GenreView = ({ token })=>{
                                     children: genres.Name
                                 }, void 0, false, {
                                     fileName: "components/genre-view/genre-view.jsx",
-                                    lineNumber: 42,
+                                    lineNumber: 28,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "components/genre-view/genre-view.jsx",
-                            lineNumber: 40,
+                            lineNumber: 26,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tr", {
@@ -44305,7 +44290,7 @@ const GenreView = ({ token })=>{
                                     children: "Description: "
                                 }, void 0, false, {
                                     fileName: "components/genre-view/genre-view.jsx",
-                                    lineNumber: 45,
+                                    lineNumber: 31,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -44313,24 +44298,24 @@ const GenreView = ({ token })=>{
                                     children: genres.Description
                                 }, void 0, false, {
                                     fileName: "components/genre-view/genre-view.jsx",
-                                    lineNumber: 46,
+                                    lineNumber: 32,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "components/genre-view/genre-view.jsx",
-                            lineNumber: 44,
+                            lineNumber: 30,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "components/genre-view/genre-view.jsx",
-                    lineNumber: 39,
+                    lineNumber: 25,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "components/genre-view/genre-view.jsx",
-                lineNumber: 38,
+                lineNumber: 24,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -44340,22 +44325,22 @@ const GenreView = ({ token })=>{
                     children: "Back"
                 }, void 0, false, {
                     fileName: "components/genre-view/genre-view.jsx",
-                    lineNumber: 51,
+                    lineNumber: 37,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "components/genre-view/genre-view.jsx",
-                lineNumber: 50,
+                lineNumber: 36,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "components/genre-view/genre-view.jsx",
-        lineNumber: 37,
+        lineNumber: 23,
         columnNumber: 5
     }, undefined);
 };
-_s(GenreView, "bCs1bZ+2BrW7DOm/U5iykXaggQ4=", false, function() {
+_s(GenreView, "Wod2kd1jDWbcxNV1I1HpTJd4Fo4=", false, function() {
     return [
         (0, _reactRouter.useParams)
     ];

@@ -13,7 +13,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-const MainView = () => {
+export const MainView = () => {
   
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
@@ -147,7 +147,7 @@ return (
                   <Navigate to="/login" replace />
                 ) : (
                   <Col md={8}>
-                    <DirectorView token={token} movies={movies}/>
+                    <DirectorView token={token}/>
                   </Col>
                 )}
               </>
@@ -197,6 +197,3 @@ return (
     </BrowserRouter>
   );
 };
-
-
-export default MainView;

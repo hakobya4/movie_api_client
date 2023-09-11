@@ -4,27 +4,13 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 
 export const GenreView = ({token}) => {
-     const [genres, setGenres] = useState([]);
-     const { genre } = useParams();
-
+    const [genres, setGenres] = useState([]);
+    const { genre } = useParams();
     useEffect(() => {
     if (!token) {
       return;
     }
     fetch(`https://movie-api-myflix-39dfea723223.herokuapp.com/genre/${genre}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setGenres(data.Genre);
-      });
-  }, [token]);
-
-  useEffect(() => {
-    if (!token) {
-      return;
-    }
-    fetch(`https://movie-api-myflix-39dfea723223.herokuapp.com/movies/`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => response.json())
