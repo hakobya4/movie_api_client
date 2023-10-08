@@ -9,28 +9,25 @@ import { GenreView } from "../genre-view/genre-view";
 import { DirectorView } from "../director-view/director-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainView = () => {
-  
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
-  const [user, setUser] = useState(storedUser? storedUser : null);
-  const [token, setToken] = useState(storedToken? storedToken : null);
+  const [user, setUser] = useState(storedUser ? storedUser : null);
+  const [token, setToken] = useState(storedToken ? storedToken : null);
   const [selectedMovies, searchMovies] = useState("");
 
   const [movies, setMovies] = useState([]);
-
-
 
   useEffect(() => {
     if (!token) {
       return;
     }
     fetch("https://movie-api-myflix-39dfea723223.herokuapp.com/movies", {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -42,26 +39,29 @@ export const MainView = () => {
             image: movie.ImagePath,
             director: {
               name: movie.Director.Name,
-              bio:movie.Director.Bio, 
-              birth:movie.Director.Birth,
-              death:movie.Director.Death
+              bio: movie.Director.Bio,
+              birth: movie.Director.Birth,
+              death: movie.Director.Death,
             },
-            genre:{
+            genre: {
               name: movie.Genre.Name,
-              description: movie.Genre.Description
-            }
+              description: movie.Genre.Description,
+            },
           };
         });
         setMovies(moviesFromApi);
       });
   }, [token]);
 
-
-return (
+  return (
     <BrowserRouter>
       <NavigationBar
-          user={user}
-          onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); }}
+        user={user}
+        onLoggedOut={() => {
+          setUser(null);
+          setToken(null);
+          localStorage.clear();
+        }}
       />
       <Row className="justify-content-md-center">
         <Routes>
@@ -77,7 +77,6 @@ return (
                   </Col>
                 )}
               </>
-
             }
           />
           <Route
@@ -92,7 +91,6 @@ return (
                   </Col>
                 )}
               </>
-
             }
           />
           <Route
@@ -105,7 +103,12 @@ return (
                   <Col>The list is empty!</Col>
                 ) : (
                   <Col md={8}>
-                    <MovieView movies={movies} user={user}  setUser={setUser} token={token}/>
+                    <MovieView
+                      movies={movies}
+                      user={user}
+                      setUser={setUser}
+                      token={token}
+                    />
                   </Col>
                 )}
               </>
@@ -119,7 +122,17 @@ return (
                   <Navigate to="/login" replace />
                 ) : (
                   <Col md={5}>
-                    <ProfileView user={user} setUser={setUser} token={token} movies={movies} onLoggedOut={() => { setUser(null); setToken(null); localStorage.clear(); }}/>
+                    <ProfileView
+                      user={user}
+                      setUser={setUser}
+                      token={token}
+                      movies={movies}
+                      onLoggedOut={() => {
+                        setUser(null);
+                        setToken(null);
+                        localStorage.clear();
+                      }}
+                    />
                   </Col>
                 )}
               </>
@@ -147,7 +160,7 @@ return (
                   <Navigate to="/login" replace />
                 ) : (
                   <Col md={8}>
-                    <DirectorView token={token}/>
+                    <DirectorView token={token} />
                   </Col>
                 )}
               </>
@@ -163,30 +176,40 @@ return (
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                  <Row className="d-flex m-2 justify-content-end">
-                    <Col xs="auto">
-                      <Form.Control
-                        onChange={(e) => searchMovies(e.target.value)}
-                        type="text"
-                        placeholder="Title Genre or Director"
-                        className=" mr-sm-2"
-                      />
-                    </Col>
-                    <Col xs="auto">
-                      <Button type="submit" variant="outline-success">Submit</Button>
-                    </Col>
-                  </Row>
-                  {movies.filter((movie) => {
-                        return selectedMovies === "" ? movie :
-                          movie.title.toLowerCase().includes(selectedMovies.toLowerCase()) ||
-                          movie.genre.name.toLowerCase().includes(selectedMovies.toLowerCase())||
-                          movie.director.name.toLowerCase().includes(selectedMovies.toLowerCase())
-                      }
-                    ).map((movie) => (
-                      <Col className="mb-4" key={movie.id} md={3}>
-                        <MovieCard movie={movie} />
+                    <Row className="d-flex m-2 justify-content-end">
+                      <Col xs="auto">
+                        <Form.Control
+                          onChange={(e) => searchMovies(e.target.value)}
+                          type="text"
+                          placeholder="Title Genre or Director"
+                          className=" mr-sm-2"
+                        />
                       </Col>
-                    ))}
+                      <Col xs="auto">
+                        <Button type="submit" variant="outline-success">
+                          Submit
+                        </Button>
+                      </Col>
+                    </Row>
+                    {movies
+                      .filter((movie) => {
+                        return selectedMovies === ""
+                          ? movie
+                          : movie.title
+                              .toLowerCase()
+                              .includes(selectedMovies.toLowerCase()) ||
+                              movie.genre.name
+                                .toLowerCase()
+                                .includes(selectedMovies.toLowerCase()) ||
+                              movie.director.name
+                                .toLowerCase()
+                                .includes(selectedMovies.toLowerCase());
+                      })
+                      .map((movie) => (
+                        <Col className="mb-4" key={movie.id} md={3}>
+                          <MovieCard movie={movie} />
+                        </Col>
+                      ))}
                   </>
                 )}
               </>
